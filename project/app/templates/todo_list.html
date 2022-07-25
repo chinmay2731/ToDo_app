@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" action="/">
+       {% csrf_token %}
+       {{ form }}
+       <button type="submit" class="btn btn-info">ADD</button>
+     {% for todo in todoapp %}
+    <h3> {{ todo.text}}</h3>
+    {% if todo.Complete == True %}
+        <p><button type="button" class="btn btn-secondary">Complete</button></p>
+            {% else %}
+                <p><button type="button" class="btn btn-warning">Not Complete</button></p>
+    {% endif %}
+    <a class="btn btn-info" href="{% url 'todo_update' todo.id %}">Update</a>
+    <a class="btn btn-info" href="{% url 'todo_delete' todo.id %}">Delete</a>
+
+{% endfor %}
+{% endblock %}
+</form>
